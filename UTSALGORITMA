@@ -1,0 +1,89 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class projectParkiranKendaraan{
+    int jumlahLantai = 3;
+    static int TotalJumlahKendaraan = 450;
+    public static String[] Lantai1 = new String[149];
+    public static String[] Lantai2 = new String[149];
+    public static String[] Lantai3 =  new String[149];
+
+    public static int[] BobotMaksimalLantai1 = {450000};
+    public static int[] BobotMaksimalLantai2 = {200000};
+    public static int[] BobotMaksimalLantai3 = {150000};
+
+    public static void PrintInfoKendaraan(){
+        int TotalLantai1 = 0;
+        int TotalSisaKuota = 0;
+        for (int index=0; index<Lantai1.length;index++){
+            if (Lantai1[index] != null){
+                TotalLantai1++;
+            }
+        }
+        int TotalLantai2 = 0;
+        for (int index=0; index<Lantai2.length;index++){
+            if (Lantai2[index] != null){
+                TotalLantai2++;
+            }
+        }
+        int TotalLantai3 =0;
+        for (int index=0; index<Lantai3.length;index++){
+            if (Lantai3[index] != null){
+                TotalLantai3++;
+            }
+        }
+        TotalSisaKuota = TotalJumlahKendaraan - TotalLantai1 -TotalLantai2 - TotalLantai3;
+        System.out.println("Total Kendaraan Lantai1:" + TotalLantai1 + " | Total Kendaraan Lantai2: " + TotalLantai2 + " | Total Kendaraan Lantai3: " + TotalLantai3);
+        System.out.println("___________________________");
+    }
+    public static void ChekIndexArray(String[] myArray,String kendaraan){
+        int indexNow = 0;
+        for (int index=0; index<myArray.length;index++){
+            if (myArray[index] != null){
+                indexNow++;
+            }
+        }
+        if (indexNow<myArray.length){
+            myArray[indexNow] = kendaraan;
+        }
+    }
+    public static void  simpanKendaraan (int angkaRandom,String kendaraan){
+        switch (angkaRandom){
+            case 1:
+                ChekIndexArray(Lantai1,kendaraan);
+                System.out.println("Anda parkir dilantai1");
+                PrintInfoKendaraan();
+                break;
+            case 2:
+                ChekIndexArray(Lantai2,kendaraan);
+                System.out.println("Anda parkir dilantai2");
+                PrintInfoKendaraan();
+                break;
+            case 3:
+                ChekIndexArray(Lantai3,kendaraan);
+                System.out.println("Anda parkir dilantai3");
+                PrintInfoKendaraan();
+                break;
+        }
+    }
+    public static void inputKendaraan(){
+        Scanner inputData = new Scanner(System.in);
+        while (true){
+            System.out.println("Masukan Plat Nomor =");
+            String platNomor = inputData.nextLine();
+            if (platNomor.isBlank()) {
+                System.out.println("Plat Nomor Wajib Diisi");
+                inputKendaraan();
+            }else{
+                Random hasilRandom = new Random();
+                int jenisRandom = hasilRandom.nextInt(3)+1;
+                simpanKendaraan(jenisRandom,platNomor);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+    }
+
+}
